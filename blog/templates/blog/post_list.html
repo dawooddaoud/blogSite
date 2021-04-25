@@ -1,0 +1,17 @@
+{%extends 'base_bootstrap.html'%}
+{% block content %}
+<h1>Posts</h1>
+<hr>
+{% if post_list %}
+  {% for post in post_list %}
+  <hr>
+    <h2><a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a></h2>
+    <small>
+      {{post.content|slice:":400" }}
+      <a href="{% url 'blog:post_detail' post.slug %}">...</a>
+      <h4>{{ post.category }}</h4>
+    </small>
+
+  {% endfor %}
+{% endif %}
+{% endblock %}

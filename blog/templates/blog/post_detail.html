@@ -1,0 +1,9 @@
+{%extends 'base_bootstrap.html'%}
+{% block content %}
+<h1>{{ post.category }}</h1>
+<h3>{{ post.title}}</h3>
+<p>{{ post.content }}</p>
+<footer>
+  {{ post.author }} <br> {{ post.created_on.date | date }}
+</footer>
+{% endblock %}

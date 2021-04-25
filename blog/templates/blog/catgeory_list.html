@@ -1,0 +1,13 @@
+{%extends 'base_bootstrap.html'%}
+{% block content %}
+<h1>Posts</h1>
+{% if catgeory_list %}
+<ul>
+  {% for catgeory in catgeory_list %}
+  <li>
+    <a href="{%url 'blog:catgeory_detail' catgeory.id %}">1</a>{{ catgeory.name }}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}
