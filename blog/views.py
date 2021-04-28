@@ -47,13 +47,13 @@ def done(request):
 
 class PostCreate(LoginRequiredMixin,CreateView):
     model = Post
-    fields = ('title','author','category','slug','content',)
+    fields = ('title','category','author','content',)
     prepopulated_fields = {'slug': ('title',),}
     success_url = reverse_lazy('blog:done')
 
 class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
-    fields = ('title','author','content','slug',)
+    fields = ('title','content',)
     success_url = reverse_lazy('blog:edited')
 
 
