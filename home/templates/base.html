@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
   <meta charset="utf-8">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -13,14 +13,55 @@
 
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
 
 
+.sidebar {
+margin: 0;
+padding: 0;
+width: 200px;
+background-color: #f1f1f1;
+position: fixed;
+height: 100%;
+overflow: auto;
+}
+
+/* Sidebar links */
+.sidebar a {
+display: block;
+color: black;
+padding: 16px;
+text-decoration: none;
+}
+
+/* Active/current link */
+.sidebar a.active {
+display: block;
+background-color: #04AA6D;
+color: white;
+}
+
+/* Links on mouse-over */
+.sidebar a:hover:not(.active) {
+background-color: #555;
+color: white;
+}
+
+/* Page content. The value of the margin-left property should match the value of the sidebar's width property */
+div.content {
+margin-left: 200px;
+margin-bottom: 200px;
+padding: 1px 16px;
+height: 1000px;
+}
+
+</style>
 {% block head %} {% endblock %}
 
 </head>
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/">Blog</a>
+  <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#"> {%block owner%} {%endblock%}</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -28,12 +69,12 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="{% url 'logout' %}">Logout <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
-      </li>
-      <li class="nav-item dropdown">
+      </li> -->
+      <!-- <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Categories
         </a>
@@ -43,21 +84,33 @@
           <a class="dropdown-item" href="/category/Geography/">Geography</a>
           <a class="dropdown-item" href="/category/Entertainment/">Entertainment</a>
         </div>
-      </li>
-      <li class="nav-item">
-      <a class="nav-link disabled" href="#">Disabled</a>
-    </li>
-  </ul>
+      </li> -->
+      <!-- <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li> -->
+    </ul>
     <form action="{% url 'blog:search_results' %}" class="form-inline my-2 my-lg-0" method="get">
       <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
 </nav>
+<nav>
+	<!-- The sidebar -->
+	<div class="sidebar">
+		<a class="active" href="{%url 'blog:create' %}">Create Post</a>
+	  <a class="active" href="{%url 'blog:create' %}">Create Post</a>
+	  <a href="{%url 'blog:drafts' %}">Draft Posts</a>
+	  <a href="{%url 'blog:author_panel'%}">Published Posts</a>
+	</div>
+</nav>
+
 </header>
+
 <body>
-  <div class="container">
-    {%block content%} {%endblock%}
-  </div>
+<div class="content">
+{% block content %}
+{% endblock %}
+</div>
 </body>
 </html>

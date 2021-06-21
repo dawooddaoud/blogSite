@@ -1,7 +1,24 @@
-{% extends 'base_bootstrap.html' %}
-{% block content %}
+{%extends 'base.html'%}
+{%block head%}
+<head>
+  <title>Edited</title>
+</head>
+{%endblock%}
+<header>
+  {%block owner%}
+  {% for owner in owners %}
+      <h4>{{ owner.owner }}</h4>
+  {%endfor%}
+  {% endblock %}
+</header>
+<body>
+  <div class="done">
+    {%block content%}
+    <h1>Published Posts</h1><br>
+    <h1>Edited!</h1>
+    <p>Blog has been edited successfully.</p>
+  </div>
+  <p> <a href="{%url 'blog:author_panel'%}">Post panel</a> </p>
+  {% endblock content %}
 
-<p>Updated</p>
-
-
-{% endblock %}
+</body>

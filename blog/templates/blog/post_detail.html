@@ -1,9 +1,24 @@
 {%extends 'base_bootstrap.html'%}
+{%block head%}
+<head>
+  <title>{{ post.title}}</title>
+</head>
+{%endblock%}
 {% block content %}
-<h1>{{ post.category }}</h1>
-<h3>{{ post.title}}</h3>
-<p>{{ post.content }}</p>
+<header>
+
+</header>
+
+<body>
+  <div class="container">
+    <h1>{{ post.title }}</h1>
+    <small>{{ post.content| safe }}</small>
+  </div>
+</body>
+
 <footer>
-  {{ post.author }} <br> {{ post.created_on.date | date }}
+  <br>{{ post.created_on.date | date }}<br>
+  <a href="{%url 'blog:pdf' post.slug %}">Download PDF</a>
 </footer>
+
 {% endblock %}

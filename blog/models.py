@@ -1,4 +1,8 @@
 from django.db import models
+from django.core.validators import MinLengthValidator
+from django.contrib.auth.models import User
+from django.conf import settings
+from ckeditor.fields import RichTextField
 
 
 
@@ -6,13 +10,6 @@ STATUS = (
     (0,"Draft"),
     (1,"Publish")
 )
-
-
-class Author(models.Model):
-    name = models.CharField(max_length = 20)
-
-    def __str__(self):
-        return self.name
 
 
 
@@ -29,11 +26,11 @@ class Category(models.Model):
 
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
-    author = models.ForeignKey('Author', on_delete= models.CASCADE)
+    owner = models.ForeignKey(settings.AUTH_USER_MODEL , on_delete=models.CASCADE)
     category = models.ForeignKey('Category', on_delete=models.CASCADE)
     slug = models.SlugField(max_length=200, unique=True)
     updated_on = models.DateTimeField(auto_now= True)
-    content = models.TextField()
+    content = RichTextField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     status = models.IntegerField(choices=STATUS, default=0)
 

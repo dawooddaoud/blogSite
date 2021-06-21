@@ -1,0 +1,29 @@
+{%extends 'base0.html'%}
+{%block head%}
+<head>
+  <title>Draft Posts</title>
+</head>
+{%endblock%}
+<header>
+  {%block owner%}
+  {% for owner in owners %}
+      <h4>Welcome {{ owner.owner }}</h4>
+  {%endfor%}
+  {% endblock %}
+</header>
+<body>
+  <div class="content">
+    {%block content%}
+    <h1>Published Posts</h1><br>
+    <h1>Draft Posts</h1><hr>
+    {% for post in posts %}
+    <ul>
+      <li>
+         <a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a> <br>( {{post.category}} | {{post.created_on |date }} )<br>
+         <a href="{%url 'blog:update' post.slug %}">Edit Post</a>
+      </li>
+    </ul>
+    {%endfor%}
+    {%endblock%}
+  </div>
+</body>

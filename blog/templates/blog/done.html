@@ -1,5 +1,24 @@
-{% extends 'base_bootstrap.html' %} {% block content %}
-<div class="done">
-  <p>Done! Blog has been submitted successfully <br>We kindly ask you to wait whily yout submission is under review.<br>Thank you for your time.</p>
-</div>
-{% endblock content %}
+{%extends 'base.html'%}
+{%block head%}
+<head>
+  <title>Done</title>
+</head>
+{%endblock%}
+<header>
+  {%block owner%}
+  {% for owner in owners %}
+      <h4>{{ owner.owner }}</h4>
+  {%endfor%}
+  {% endblock %}
+</header>
+<body>
+  <div class="done">
+    {%block content%}
+    <h1>Published Posts</h1><br>
+    <h1>Done!</h1>
+    <p>Blog has been submitted successfully. <br>Your submission is under review.<br>Thank you for your time.</p><hr>
+  </div>
+  <p> <a href="{%url 'blog:author_panel'%}">Post panel</a> </p>
+  {% endblock content %}
+
+</body>

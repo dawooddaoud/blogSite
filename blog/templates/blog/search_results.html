@@ -1,20 +1,23 @@
 {%extends 'base_bootstrap.html'%}
-{%block head%}
+{% block head %}
 <head>
-  <title>Home</title>
+  <title>Search Results</title>
 </head>
-{%endblock%}
-<head>
+{% endblock %}
 {% block content %}
-<h1>Welcome ✌</h1>
+
+
+<h1>Search result for '{{ query }}'</h1>
 <hr>
 {% if post_list %}
   {% for post in post_list %}
     <h2><a href="{% url 'blog:post_detail' post.slug %}">{{ post.title }}</a></h2>
     <small>
       {{post.content|slice:":400"|safe }}
-      <a href="{% url 'blog:post_detail' post.slug %}">...</a><hr>
+      <a href="{% url 'blog:post_detail' post.slug %}">...</a>
     </small>
   {% endfor %}
+  {%else%}
+  <p>No results found</p>
 {% endif %}
 {% endblock %}
